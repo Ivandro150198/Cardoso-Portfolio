@@ -15,6 +15,7 @@
             <li><a href="#home">Início</a></li>
             <li><a href="#about">Sobre</a></li>
             <li><a href="#projects">Projetos</a></li>
+            <li><a href="#gallery">Galeria</a></li>
             <li><a href="#contact">Contato</a></li>
         </ul>
         <div class="menu-toggle" id="mobile-menu">
@@ -55,35 +56,17 @@
 
     <section id="projects" class="section-padding bg-dark">
         <h2 class="section-title">Meus Projetos</h2>
-        <div class="projects-grid">
-            <div class="project-card">
-                <div class="card-content">
-                    <h3>Nome do Projeto 1</h3>
-                    <p>Uma breve descrição do que o projeto faz e qual problema ele resolve.</p>
-                    <div class="tech-stack">
-                        <small>HTML</small> <small>CSS</small> <small>JS</small>
-                    </div>
-                    <div class="card-links">
-                        <a href="#" target="_blank"><i class="fab fa-github"></i> Code</a>
-                        <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Demo</a>
-                    </div>
-                </div>
-            </div>
+        <div class="projects-grid" id="projects-grid">
+            <!-- Projetos serão carregados dinamicamente do localStorage -->
+        </div>
+    </section>
 
-            <div class="project-card">
-                <div class="card-content">
-                    <h3>Nome do Projeto 2</h3>
-                    <p>Descrição do segundo projeto. Foco em sistemas ou APIs.</p>
-                    <div class="tech-stack">
-                        <small>React</small> <small>API</small>
-                    </div>
-                    <div class="card-links">
-                        <a href="#" target="_blank"><i class="fab fa-github"></i> Code</a>
-                        <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Demo</a>
-                    </div>
-                </div>
-            </div>
-             </div>
+    <!-- Seção de Galeria de Imagens -->
+    <section id="gallery" class="section-padding">
+        <h2 class="section-title">Galeria de Imagens</h2>
+        <div class="gallery-grid" id="gallery-grid">
+            <!-- Imagens serão carregadas dinamicamente do localStorage -->
+        </div>
     </section>
 
     <section id="contact" class="section-padding">
