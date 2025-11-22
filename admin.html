@@ -53,9 +53,143 @@
         </nav>
 
         <div class="admin-content">
-            <h1 class="admin-title">Gerenciar Portfólio</h1>
+            <!-- Dashboard Header -->
+            <div class="dashboard-header">
+                <div>
+                    <h1 class="admin-title">Painel de Controle</h1>
+                    <p class="admin-subtitle">Gerencie todo o conteúdo do seu portfólio</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-secondary" onclick="exportData()">
+                        <i class="fas fa-download"></i> Exportar Backup
+                    </button>
+                    <label for="import-backup" class="btn btn-secondary">
+                        <i class="fas fa-upload"></i> Importar Backup
+                    </label>
+                    <input type="file" id="import-backup" accept=".json" style="display: none;" onchange="importData(event)">
+                </div>
+            </div>
 
-            <!-- Seção de Projetos -->
+            <!-- Dashboard Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: rgba(0, 212, 255, 0.1);">
+                        <i class="fas fa-folder" style="color: var(--primary-color);"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="projects-count">0</h3>
+                        <p>Projetos</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: rgba(34, 197, 94, 0.1);">
+                        <i class="fas fa-code" style="color: #22c55e;"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="skills-count">0</h3>
+                        <p>Skills Cadastradas</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: rgba(239, 68, 68, 0.1);">
+                        <i class="fas fa-share-alt" style="color: #ef4444;"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="social-count">0</h3>
+                        <p>Redes Sociais</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs Navigation -->
+            <div class="admin-tabs">
+                <button class="tab-btn active" onclick="switchTab('personal')">
+                    <i class="fas fa-user"></i> Informações Pessoais
+                </button>
+                <button class="tab-btn" onclick="switchTab('about')">
+                    <i class="fas fa-info-circle"></i> Sobre Mim
+                </button>
+                <button class="tab-btn" onclick="switchTab('projects')">
+                    <i class="fas fa-folder"></i> Projetos
+                </button>
+                <button class="tab-btn" onclick="switchTab('contact')">
+                    <i class="fas fa-envelope"></i> Contato
+                </button>
+            </div>
+
+            <!-- Tab: Informações Pessoais -->
+            <div id="tab-personal" class="tab-content active">
+                <section class="admin-section">
+                    <h2 class="section-header">
+                        <i class="fas fa-user"></i> Informações do Hero (Página Inicial)
+                    </h2>
+                    
+                    <div class="admin-upload-area">
+                        <div class="form-group">
+                            <label for="owner-image-upload">
+                                <i class="fas fa-user-circle"></i> Sua Foto de Perfil
+                            </label>
+                            <label for="owner-image-upload" class="upload-label" style="display: block; margin-top: 10px;">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                Clique para fazer upload da sua foto
+                            </label>
+                            <input type="file" id="owner-image-upload" accept="image/*" style="display: none;">
+                            <div class="image-preview-container" id="owner-image-preview" style="margin-top: 15px;"></div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="hero-greeting">Saudação</label>
+                                <input type="text" id="hero-greeting" placeholder="Ex: Olá, eu sou" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label for="hero-name">Seu Nome</label>
+                                <input type="text" id="hero-name" placeholder="Seu Nome Aqui" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label for="hero-title">Título Profissional</label>
+                                <input type="text" id="hero-title" placeholder="Ex: Desenvolvedor Web Fullstack" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label for="hero-description">Descrição</label>
+                                <textarea id="hero-description" placeholder="Uma breve descrição sobre você" class="form-textarea"></textarea>
+                            </div>
+                        </div>
+                        <button class="btn" onclick="savePersonalInfo()">
+                            <i class="fas fa-save"></i> Salvar Informações
+                        </button>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Tab: Sobre Mim -->
+            <div id="tab-about" class="tab-content">
+                <section class="admin-section">
+                    <h2 class="section-header">
+                        <i class="fas fa-info-circle"></i> Seção Sobre Mim
+                    </h2>
+                    
+                    <div class="admin-upload-area">
+                        <div class="form-group">
+                            <label for="about-text">Texto Sobre Mim</label>
+                            <textarea id="about-text" placeholder="Descreva sobre você, sua experiência e paixões..." class="form-textarea" rows="5"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="skills-input">Skills (separadas por vírgula)</label>
+                            <input type="text" id="skills-input" placeholder="Ex: HTML5, CSS3, JavaScript, React, Node.js" class="form-input">
+                            <small class="form-hint">Separe cada skill com vírgula</small>
+                        </div>
+                        
+                        <button class="btn" onclick="saveAboutInfo()">
+                            <i class="fas fa-save"></i> Salvar Sobre Mim
+                        </button>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Tab: Projetos -->
+            <div id="tab-projects" class="tab-content">
             <section class="admin-section">
                 <h2 class="section-header">
                     <i class="fas fa-folder"></i> Projetos
@@ -88,24 +222,69 @@
                 </div>
             </section>
 
-            <!-- Seção de Galeria -->
-            <section class="admin-section">
-                <h2 class="section-header">
-                    <i class="fas fa-images"></i> Galeria de Imagens
-                </h2>
-                
-                <div class="admin-upload-area">
-                    <label for="gallery-image-upload" class="upload-label">
-                        <i class="fas fa-images"></i>
-                        Adicionar Imagens à Galeria (múltiplas)
-                    </label>
-                    <input type="file" id="gallery-image-upload" accept="image/*" multiple style="display: none;">
-                </div>
+            </div>
 
-                <div class="admin-items-grid" id="gallery-list">
-                    <!-- Imagens da galeria serão listadas aqui -->
-                </div>
-            </section>
+            <!-- Tab: Contato -->
+            <div id="tab-contact" class="tab-content">
+                <section class="admin-section">
+                    <h2 class="section-header">
+                        <i class="fas fa-envelope"></i> Informações de Contato
+                    </h2>
+                    
+                    <div class="admin-upload-area">
+                        <div class="form-group">
+                            <label for="contact-email">E-mail</label>
+                            <input type="email" id="contact-email" placeholder="seuemail@email.com" class="form-input">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact-text">Texto de Contato</label>
+                            <textarea id="contact-text" placeholder="Ex: Estou disponível para projetos freelancer..." class="form-textarea"></textarea>
+                        </div>
+                        
+                        <h3 style="margin: 25px 0 15px; color: var(--text-color);">Redes Sociais</h3>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="social-linkedin">
+                                    <i class="fab fa-linkedin"></i> LinkedIn
+                                </label>
+                                <input type="url" id="social-linkedin" placeholder="https://linkedin.com/in/seu-perfil" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label for="social-github">
+                                    <i class="fab fa-github"></i> GitHub
+                                </label>
+                                <input type="url" id="social-github" placeholder="https://github.com/seu-usuario" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label for="social-instagram">
+                                    <i class="fab fa-instagram"></i> Instagram
+                                </label>
+                                <input type="url" id="social-instagram" placeholder="https://instagram.com/seu-perfil" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label for="social-twitter">
+                                    <i class="fab fa-twitter"></i> Twitter/X
+                                </label>
+                                <input type="url" id="social-twitter" placeholder="https://twitter.com/seu-perfil" class="form-input">
+                            </div>
+                        </div>
+                        
+                        <button class="btn" onclick="saveContactInfo()">
+                            <i class="fas fa-save"></i> Salvar Contato
+                        </button>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Toast Notification -->
+        <div id="toast" class="toast">
+            <div class="toast-content">
+                <i class="toast-icon"></i>
+                <span class="toast-message"></span>
+            </div>
         </div>
     </div>
 

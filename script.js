@@ -50,61 +50,109 @@ function getStoredProjects() {
     return stored ? JSON.parse(stored) : [];
 }
 
-// Carregar galeria do localStorage
-function loadGallery() {
-    const gallery = getStoredGallery();
-    const galleryGrid = document.getElementById('gallery-grid');
+
+// Carregar informações pessoais (Hero)
+function loadPersonalInfo() {
+    const stored = localStorage.getItem('portfolio_personal');
+    const data = stored ? JSON.parse(stored) : {};
     
-    if (gallery.length === 0) {
-        galleryGrid.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 40px;">Nenhuma imagem na galeria no momento.</p>';
-        return;
+    const heroContent = document.querySelector('.hero-content');
+    if (heroContent) {
+        // Adicionar imagem do dono se existir
+        if (data.image) {
+            let ownerImage = heroContent.querySelector('.owner-image');
+            if (!ownerImage) {
+                ownerImage = document.createElement('div');
+                ownerImage.className = 'owner-image';
+                heroContent.insertBefore(ownerImage, heroContent.firstChild);
+            }
+            ownerImage.innerHTML = `<img src="${data.image}" alt="${data.name || 'Foto do perfil'}">`;
+        }
+        
+        if (data.greeting) {
+            const greetingEl = heroContent.querySelector('p');
+            if (greetingEl) greetingEl.textContent = data.greeting;
+        }
+        if (data.name) {
+            const nameEl = heroContent.querySelector('h1');
+            if (nameEl) nameEl.textContent = data.name;
+        }
+        if (data.title) {
+            const titleEl = heroContent.querySelector('h2');
+            if (titleEl) titleEl.textContent = data.title;
+        }
+        if (data.description) {
+            const descEl = heroContent.querySelector('.hero-text');
+            if (descEl) descEl.textContent = data.description;
+        }
+    }
+}
+
+// Carregar seção Sobre Mim
+function loadAboutInfo() {
+    const stored = localStorage.getItem('portfolio_about');
+    const data = stored ? JSON.parse(stored) : {};
+    
+    const aboutText = document.querySelector('#about .about-text p');
+    if (aboutText && data.text) {
+        aboutText.textContent = data.text;
     }
     
-    galleryGrid.innerHTML = gallery.map(item => `
-        <div class="gallery-item">
-            <img src="${item.url}" alt="Galeria">
-            <div class="gallery-overlay">
-                <button class="gallery-view-btn" onclick="viewFullImage('${item.url}')">
-                    <i class="fas fa-expand"></i>
-                </button>
-            </div>
-        </div>
-    `).join('');
+    const skillsContainer = document.querySelector('.skills');
+    if (skillsContainer && data.skills && data.skills.length > 0) {
+        skillsContainer.innerHTML = data.skills.map(skill => 
+            `<span>${skill}</span>`
+        ).join('');
+    }
 }
 
-function getStoredGallery() {
-    const stored = localStorage.getItem('portfolio_gallery');
-    return stored ? JSON.parse(stored) : [];
-}
-
-function viewFullImage(imageUrl) {
-    // Criar modal para visualização em tamanho real
-    const modal = document.createElement('div');
-    modal.className = 'image-modal';
-    modal.innerHTML = `
-        <div class="modal-content">
-            <span class="modal-close" onclick="this.parentElement.parentElement.remove()">&times;</span>
-            <img src="${imageUrl}" alt="Imagem em tamanho real">
-        </div>
-    `;
-    document.body.appendChild(modal);
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.remove();
+// Carregar informações de contato
+function loadContactInfo() {
+    const stored = localStorage.getItem('portfolio_contact');
+    const data = stored ? JSON.parse(stored) : {};
+    
+    const contactContainer = document.querySelector('#contact .contact-container');
+    if (contactContainer) {
+        if (data.text) {
+            const textEl = contactContainer.querySelector('p');
+            if (textEl) textEl.textContent = data.text;
         }
-    });
+        
+        if (data.email) {
+            const emailLink = contactContainer.querySelector('.email-link');
+            if (emailLink) {
+                emailLink.textContent = data.email;
+                emailLink.href = `mailto:${data.email}`;
+            }
+        }
+        
+        if (data.social) {
+            const socialLinks = contactContainer.querySelectorAll('.social-links a');
+            if (socialLinks.length >= 1 && data.social.linkedin && data.social.linkedin !== '#') {
+                socialLinks[0].href = data.social.linkedin;
+            }
+            if (socialLinks.length >= 2 && data.social.github && data.social.github !== '#') {
+                socialLinks[1].href = data.social.github;
+            }
+            if (socialLinks.length >= 3 && data.social.instagram && data.social.instagram !== '#') {
+                socialLinks[2].href = data.social.instagram;
+            }
+        }
+    }
 }
-
-window.viewFullImage = viewFullImage;
 
 // Carregar dados quando a página carregar
 document.addEventListener('DOMContentLoaded', () => {
+    loadPersonalInfo();
+    loadAboutInfo();
     loadProjects();
-    loadGallery();
+    loadContactInfo();
 });
 
 // Atualizar quando houver mudanças no localStorage (se a página admin estiver aberta em outra aba)
 window.addEventListener('storage', () => {
+    loadPersonalInfo();
+    loadAboutInfo();
     loadProjects();
-    loadGallery();
+    loadContactInfo();
 });
