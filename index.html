@@ -6,77 +6,177 @@
     <title>Portfólio | Seu Nome</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Page Loader -->
+    <div class="page-loader">
+        <div class="loader-spinner"></div>
+    </div>
 
-    <nav class="navbar">
-        <div class="logo">DevPortfolio.</div>
-        <ul class="nav-links">
-            <li><a href="#home">Início</a></li>
-            <li><a href="#about">Sobre</a></li>
-            <li><a href="#projects">Projetos</a></li>
-            <li><a href="#contact">Contato</a></li>
-        </ul>
-        <div class="menu-toggle" id="mobile-menu">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
+    <!-- Background Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-text">Portfolio</span>
+                <span class="logo-dot">.</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link">Início</a></li>
+                <li><a href="#about" class="nav-link">Sobre</a></li>
+                <li><a href="#projects" class="nav-link">Projetos</a></li>
+                <li><a href="#contact" class="nav-link">Contato</a></li>
+            </ul>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
         </div>
     </nav>
 
+    <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="hero-content">
-            <p>Olá, eu sou</p>
-            <h1>Seu Nome Aqui</h1>
-            <h2>Desenvolvedor Web Fullstack</h2>
-            <p class="hero-text">Transformo ideias em código e problemas em soluções digitais.</p>
-            <a href="#projects" class="btn">Ver Projetos</a>
-            <a href="#contact" class="btn btn-outline">Fale Comigo</a>
+        <div class="hero-background">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+            <div class="gradient-orb orb-3"></div>
         </div>
-    </section>
-
-    <section id="about" class="section-padding">
-        <h2 class="section-title">Sobre Mim</h2>
-        <div class="about-container">
-            <div class="about-text">
-                <p>Sou um desenvolvedor apaixonado por tecnologia. Tenho experiência em criar interfaces modernas e funcionais. Estou sempre estudando novas tecnologias para aprimorar minhas habilidades.</p>
-                
-                <div class="skills">
-                    <span>HTML5</span>
-                    <span>CSS3</span>
-                    <span>JavaScript</span>
-                    <span>React</span>
-                    <span>Node.js</span>
-                    <span>Git</span>
+        <div class="hero-content">
+            <div class="hero-text-wrapper">
+                <p class="hero-greeting fade-in-up">Olá, eu sou</p>
+                <h1 class="hero-name fade-in-up" data-delay="0.1">
+                    <span class="name-text">Seu Nome Aqui</span>
+                    <span class="cursor-blink">|</span>
+                </h1>
+                <h2 class="hero-title fade-in-up" data-delay="0.2">Desenvolvedor Web Fullstack</h2>
+                <p class="hero-text fade-in-up" data-delay="0.3">Transformo ideias em código e problemas em soluções digitais.</p>
+                <div class="hero-buttons fade-in-up" data-delay="0.4">
+                    <a href="#projects" class="btn btn-primary">
+                        <span>Ver Projetos</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <span>Fale Comigo</span>
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+                <div class="arrow">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="projects" class="section-padding bg-dark">
-        <h2 class="section-title">Meus Projetos</h2>
-        <div class="projects-grid" id="projects-grid">
-            <!-- Projetos serão carregados dinamicamente do localStorage -->
-        </div>
-    </section>
-
-    <section id="contact" class="section-padding">
-        <h2 class="section-title">Vamos Conversar?</h2>
-        <div class="contact-container">
-            <p>Estou disponível para projetos freelancer e oportunidades full-time.</p>
-            <a href="mailto:seuemail@email.com" class="email-link">seuemail@email.com</a>
-            
-            <div class="social-links">
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
+    <!-- About Section -->
+    <section id="about" class="section-padding about-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <h2 class="section-title">Sobre Mim</h2>
+                <div class="title-line"></div>
+            </div>
+            <div class="about-container">
+                <div class="about-content">
+                    <div class="about-text-wrapper">
+                        <p class="about-text fade-in">Sou um desenvolvedor apaixonado por tecnologia. Tenho experiência em criar interfaces modernas e funcionais. Estou sempre estudando novas tecnologias para aprimorar minhas habilidades.</p>
+                    </div>
+                    <div class="skills-container fade-in" data-delay="0.2">
+                        <h3 class="skills-title">Tecnologias</h3>
+                        <div class="skills-grid">
+                            <div class="skill-item">
+                                <span>HTML5</span>
+                            </div>
+                            <div class="skill-item">
+                                <span>CSS3</span>
+                            </div>
+                            <div class="skill-item">
+                                <span>JavaScript</span>
+                            </div>
+                            <div class="skill-item">
+                                <span>React</span>
+                            </div>
+                            <div class="skill-item">
+                                <span>Node.js</span>
+                            </div>
+                            <div class="skill-item">
+                                <span>Git</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer>
-        <p>&copy; 2024 Seu Nome. Feito com HTML, CSS & JS.</p>
+    <!-- Projects Section -->
+    <section id="projects" class="section-padding projects-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <h2 class="section-title">Meus Projetos</h2>
+                <div class="title-line"></div>
+            </div>
+            <div class="projects-grid" id="projects-grid">
+                <!-- Projetos serão carregados dinamicamente do localStorage -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-padding contact-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">03</span>
+                <h2 class="section-title">Vamos Conversar?</h2>
+                <div class="title-line"></div>
+            </div>
+            <div class="contact-container">
+                <div class="contact-content">
+                    <p class="contact-text fade-in">Estou disponível para projetos freelancer e oportunidades full-time.</p>
+                    <a href="mailto:seuemail@email.com" class="email-link fade-in" data-delay="0.1">
+                        <i class="fas fa-envelope"></i>
+                        <span>seuemail@email.com</span>
+                    </a>
+                    <div class="social-links fade-in" data-delay="0.2">
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Seu Nome. Feito com <i class="fas fa-heart"></i> usando HTML, CSS & JS.</p>
+        </div>
     </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <script src="script.js"></script>
 </body>
